@@ -1,9 +1,8 @@
 //https://leetcode.com/problems/two-sum/
 
-package main
+package easy
 
 import (
-	"fmt"
 	"sort"
 )
 
