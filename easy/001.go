@@ -7,15 +7,8 @@ import (
 	"sort"
 )
 
-func main() {
-
-	fmt.Println(twoSum([]int{1, 2, 3, 4, 5, 6, 7, 8, 9}, 5))
-	fmt.Println(twoSum2([]int{1, 2, 3, 4, 5, 6, 7, 8, 9}, 5))
-
-}
-
-//O(n) time, O(n), space
-func twoSum(nums []int, target int) bool {
+//O(n) time | O(n), space
+func TwoSum(nums []int, target int) bool {
 
 	searchBag := make(map[int]int)
 
@@ -29,8 +22,8 @@ func twoSum(nums []int, target int) bool {
 	return false
 }
 
-//O(nlogn) time, O(1), space
-func twoSum2(nums []int, target int) bool {
+//O(nlogn) time | O(1), space
+func TwoSum2(nums []int, target int) bool {
 	sort.Ints(nums)
 
 	leftPointer := 0
