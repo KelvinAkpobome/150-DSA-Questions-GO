@@ -12,5 +12,6 @@ func main() {
 	fmt.Println(easy.ValidateSubsequence([]int{1, 2, 3, 4, 5, 6, 7, 8, 9}, []int{1, 9,3, 4}))
 	fmt.Println(easy.ValidateSubsequenceString("Akpobome", "mke"))
 	fmt.Println(easy.SortedSquaredArr([]int{1, 2, 3, 4, 5, 6, 7, 8, 9}))
+	fmt.Println(easy.Search([]int{1, 2, 3, 4, 5, 6, 7, 8, 9}, 9))
 
 }
