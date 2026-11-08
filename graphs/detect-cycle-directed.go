@@ -1,47 +1,49 @@
 package graphs
 
 func HasCycleDirected(n int, edges [][]int) bool {
-    adj := make([][]int, n)
+	adj := make([][]int, n)
 
-    for _, edge := range edges {
-        u, v := edge[0], edge[1]
-        adj[u] = append(adj[u], v)
-    }
+	for _, edge := range edges {
+		u, v := edge[0], edge[1]
+		adj[u] = append(adj[u], v)
+	}
 
-    type state int8
+	type state int8
 
-    const (
-        UNSEEN state = iota
-        ACTIVE
-        DONE
-    )
+	const (
+		UNSEEN state = iota
+		ACTIVE
+		DONE
+	)
 
-    states := make([]state, n)
+	states := make([]state, n)
 
-    var dfs func(v int) bool
+	var dfs func(v int) bool
 
-    dfs = func(v int) bool {
-        states[v] = ACTIVE
+	dfs = func(v int) bool {
+		states[v] = ACTIVE
 
-        for _, u := range adj[v] {
-            if states[u] == ACTIVE {
-                return true
-            }
+		for _, u := range adj[v] {
+			if states[u] == ACTIVE {
+				return true
+			}
 
-            if states[u] == UNSEEN && dfs(u) {
-                return true
-            }
-        }
+			if states[u] == UNSEEN {
+				if dfs(u) {
+					return true
+				}
+			}
+		}
 
-        states[v] = DONE
-        return false
-    }
+		states[v] = DONE
+		return false
+	}
 
-    for v := 0; v < n; v++ {
-        if states[v] == UNSEEN && dfs(v) {
-            return true
-        }
-    }
+	for v := 0; v < n; v++ {
+		if states[v] == UNSEEN && dfs(v) {
+			return true
+		}
+	}
 
-    return false
+	return false
 }
