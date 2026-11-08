@@ -1,3 +1,4 @@
+
 package graphs
 
 func HasCycleDirected(n int, edges [][]int) bool {
@@ -40,8 +41,10 @@ func HasCycleDirected(n int, edges [][]int) bool {
 	}
 
 	for v := 0; v < n; v++ {
-		if states[v] == UNSEEN && dfs(v) {
-			return true
+		if states[v] == UNSEEN {
+			if dfs(v) {
+				return true
+			}
 		}
 	}
 
