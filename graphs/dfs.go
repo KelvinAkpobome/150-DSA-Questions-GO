@@ -23,21 +23,19 @@ func DFSRecursive(
 func DFSIterative(graph map[int][]int, start int) []int {
 	visited := make(map[int]bool)
 	stack := []int{start}
+    
+    visited[start] = true
 	result := make([]int, 0)
 
 	for len(stack) > 0 {
 		node := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
 
-		if visited[node] {
-			continue
-		}
-
-		visited[node] = true
 		result = append(result, node)
 
 		for _, nbr := range graph[node] {
 			if !visited[nbr] {
+                visited[nbr] = true
 				stack = append(stack, nbr)
 			}
 		}
