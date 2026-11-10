@@ -1,30 +1,36 @@
 package graphs
 
 func DFSRecursive(
-    graph map[int][]int,
-    node int,
-    visited map[int]bool,
-    order []int,
+	graph map[int][]int,
+	node int,
+	visited map[int]bool,
+	order []int,
 ) []int {
-    if visited[node] {
-        return order
-    }
+	//discover a node
+	if visited[node] {
+		return order
+	}
+	//after discovery, mark as seen
+	visited[node] = true
+	order = append(order, node)
 
-    visited[node] = true
-    order = append(order, node)
+	//explore neigbours
+	for _, nbr := range graph[node] {
+		//send nbr for  discovery
+		order = DFSRecursive(graph, nbr, visited, order)
+	}
 
-    for _, nbr := range graph[node] {
-        order = DFSRecursive(graph, nbr, visited, order)
-    }
-
-    return order
+	return order
 }
 
 func DFSIterative(graph map[int][]int, start int) []int {
 	visited := make(map[int]bool)
+
+	//discover first node
 	stack := []int{start}
-    
-    visited[start] = true
+
+	//after discovery, mark first node as seen
+	visited[start] = true
 	result := make([]int, 0)
 
 	for len(stack) > 0 {
@@ -32,11 +38,14 @@ func DFSIterative(graph map[int][]int, start int) []int {
 		stack = stack[:len(stack)-1]
 
 		result = append(result, node)
-
+		//explore neigbours
 		for _, nbr := range graph[node] {
 			if !visited[nbr] {
-                visited[nbr] = true
+				//discover nbr
 				stack = append(stack, nbr)
+
+				//after discovery, mark as seen
+				visited[nbr] = true
 			}
 		}
 	}

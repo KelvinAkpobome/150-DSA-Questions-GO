@@ -2,21 +2,30 @@ package graphs
 
 func BFS(graph map[int][]int, start int) []int {
 	visited := make(map[int]bool)
+	head := 0
 
-	visited[start] = true
+	//discover first node
 	queue := []int{start}
+
+	//after discovery, mark as seen
+	visited[start] = true
 
 	result := make([]int, 0)
 
-	for len(queue) > 0 {
-		node := queue[0]
-		queue = queue[1:]
+	for head < len(queue) {
+		node := queue[head]
+		head++
 		result = append(result, node)
 
+		//explore neigbours
 		for _, nbr := range graph[node] {
 			if !visited[nbr] {
-				visited[nbr] = true
+				//discover nbr
 				queue = append(queue, nbr)
+
+				//after discovery, mark as seen
+				visited[nbr] = true
+
 			}
 		}
 	}
